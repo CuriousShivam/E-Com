@@ -35,6 +35,7 @@ const getUserByUsernameAndPassword = async (req, res) => {
             res.cookie('access_token', token, {
                 httpOnly: true,
                 secure: true,
+                sameSite: 'None'
             }).status(200).json({message: "User Logged In successfully...", user});
             console.log(user)
         } else {
