@@ -24,7 +24,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(cors(
     {
-    origin: process.env.ORIGIN, // your frontend origin
+    origin: 'https://e-com-eight-roan.vercel.app', // your frontend origin
     credentials: true
 }
 ));
