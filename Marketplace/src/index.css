@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    @apply m-0 p-0 box-border;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+.swiper-pagination {
+    bottom: 15px !important; /* Move pagination up */
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    z-index: 10;
+}
+
+.swiper-pagination-bullet {
+    background-color: black; /* bullet color */
+    opacity: 0.7;
+}
+
+.swiper-pagination-bullet-active {
+    background-color: red; /* active bullet color */
+}
+
