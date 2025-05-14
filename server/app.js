@@ -35,7 +35,7 @@ const allowedOrigins = [
     'https://new-ecommerce-mauve.vercel.app',
     'https://alokcode.tech',
     'http://localhost:5173',
-    'https://e-com-jet-delta.vercel.app/'
+    'https://e-com-jet-delta.vercel.app'
 ];
 
 app.use(cors({
