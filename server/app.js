@@ -82,7 +82,7 @@ app.use('/api/ui', uiCustomize)
 app.use('/api/faq', faq)
 app.use('/api/newsletter', newsletter)
 app.use("/api/reviews", reviewRoutes);
-
+app.use("/api/saveForLater", saveForLater);
 
 // Start server
 app.listen(port, () => {
