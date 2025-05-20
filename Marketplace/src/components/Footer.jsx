@@ -1,16 +1,13 @@
 import Newsletter from "../pages/customer/HomeSections/Newsletter.jsx";
-import { MessageCircle } from "lucide-react";
-import {useNavigate} from "react-router-dom";
 
 const Footer = () => {
-    const navigate = useNavigate();
     return (
         <footer className=" border-t-2 border-black p-8 mt-16">
-            <a className="fixed border-2 border-black rounded-[50%] bottom-0 right-0 m-10 p-5 bg-white hover:scale-105 transition-all"
+            <a className="fixed border-2 rounded-[50%] bottom-0 right-0 m-10 bg-white hover:scale-105 transition-all z-10"
                href="https://wa.me/8700011355"
                target="_blank"
             >
-                <MessageCircle />
+                <img alt='wtsup' className='h-[60px]' src='https://www.iconpacks.net/icons/2/free-icon-whatsapp-logo-4456.png'/>
             </a>
             <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
                 <div>

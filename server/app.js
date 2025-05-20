@@ -15,14 +15,8 @@ const {
     newsletter,
     reviewRoutes,
     saveForLater,
-    // authRouter
 } = require('./routes/index')
 const cookieParser = require('cookie-parser')
-//require('./config/passport')
-// const passport = require("passport");
-// const session = require("express-session");
-// const MongoStore = require("connect-mongo");
-// const GoogleStrategy = require("passport-google-oauth20").Strategy
 
 const app = express()
 const port = process.env.PORT || 3002;
@@ -51,26 +45,12 @@ app.use(cors({
 }
 ));
 
-// app.use(
-//     session({
-//         secret:process.env.SECRET_KEY,
-//         resave: false,
-//         saveUninitialized: false,
-//         store: MongoStore.create({ mongoUrl: process.env.MONGO_URI }),
-//     })
-// );
-
-// Passport middleware
-//app.use(passport.initialize());
-//app.use(passport.session());
-
 mongoose
     .connect(process.env.MONGO_URI, {})
     .then(() => console.log("MongoDB Connected"))
     .catch((err) => console.error("MongoDB Connection Error:", err));
 
 // Api routes
-//app.use('/api/auth', authRouter)
 app.use('/api/user', userRouter)
 app.use('/api/product', productRouter)
 app.use('/api/order', orderRouter)

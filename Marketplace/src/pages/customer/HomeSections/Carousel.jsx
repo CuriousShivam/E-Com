@@ -8,19 +8,7 @@ import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 
 
-const Carousel = () => {
-    const [banners, setBanners] = useState([]);
-
-    useEffect(() => {
-        const fetchBanners = async () => {
-            const res = await axios.get(`${import.meta.env.VITE_BASE_URL}/api/ui/get`);
-            if (res.data.success) {
-                console.log(res.data.data.banners);
-                setBanners(res.data.data.banners);
-            }
-        };
-        fetchBanners();
-    }, []);
+const Carousel = ({banners, bannersLoading}) => {
     return (
         <>
 
@@ -35,26 +23,48 @@ const Carousel = () => {
                     spaceBetween={30}
                     slidesPerView={1}
                     loop={true}
-                    autoplay={{ delay: 3000, disableOnInteraction: false }}
+                    autoplay={{delay: 3000, disableOnInteraction: false}}
                     className="rounded-lg overflow-hidden"
                 >
-                    {banners.map((banner) => (
-                        <SwiperSlide key={banner._id}>
-                            <div className="relative w-full h-[300px] md:h-[400px] lg:h-[500px] overflow-hidden">
-                                <a href={banner.redirectUrl}>
+                    {bannersLoading
+                        ?
+                        <>
+                            <SwiperSlide key="id2">
+                                <div className="relative w-full h-[300px] md:h-[400px] lg:h-[500px] overflow-hidden">
                                     <img
-                                        src={banner.imageUrl}
+                                        src='https://media.istockphoto.com/id/1324356458/vector/picture-icon-photo-frame-symbol-landscape-sign-photograph-gallery-logo-web-interface-and.jpg?s=612x612&w=0&k=20&c=ZmXO4mSgNDPzDRX-F8OKCfmMqqHpqMV6jiNi00Ye7rE='
                                         alt="Banner"
-                                        className="absolute top-0 left-0 w-full h-full object-cover transition-transform duration-500 hover:scale-105"
-
+                                        className="absolute top-0 left-0 w-full h-full object-fill transition-transform duration-500 hover:scale-105 animate-pulse"
                                     />
-                                </a>
-                            </div>
-                        </SwiperSlide>
-                    ))}
+                                </div>
+                            </SwiperSlide>
+                            <SwiperSlide key="id1">
+                                <div className="relative w-full h-[300px] md:h-[400px] lg:h-[500px] overflow-hidden">
+                                    <img
+                                        src='https://media.istockphoto.com/id/1324356458/vector/picture-icon-photo-frame-symbol-landscape-sign-photograph-gallery-logo-web-interface-and.jpg?s=612x612&w=0&k=20&c=ZmXO4mSgNDPzDRX-F8OKCfmMqqHpqMV6jiNi00Ye7rE='
+                                        alt="Banner"
+                                        className="absolute top-0 left-0 w-full h-full object-fill transition-transform duration-500 hover:scale-105 animate-pulse"
+                                    />
+                                </div>
+                            </SwiperSlide>
+                        </>
+
+                        : banners.map((banner) => (
+                            <SwiperSlide key={banner._id}>
+                                <div className="relative w-full h-[300px] md:h-[400px] lg:h-[500px] overflow-hidden">
+                                    <a href={banner.redirectUrl}>
+                                        <img
+                                            src={banner.imageUrl}
+                                            alt="Banner"
+                                            className="absolute top-0 left-0 w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+
+                                        />
+                                    </a>
+                                </div>
+                            </SwiperSlide>
+                        ))}
                 </Swiper>
             </div>
-
 
 
         </>

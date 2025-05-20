@@ -1,51 +1,36 @@
 import {Swiper, SwiperSlide} from 'swiper/react';
-import {Autoplay} from 'swiper/modules';
+import {Autoplay, Navigation, Pagination} from 'swiper/modules';
 import 'swiper/css';
-import {useEffect, useState} from "react";
-import axios from "axios";
 import 'swiper/css/scrollbar';
 import {useNavigate} from "react-router-dom";
 
-const MainProducts = () => {
-    const [mainProducts, setMainProducts] = useState([]);
+const MainProducts = ({mainProducts, mainProductsLoading}) => {
     const navigate = useNavigate()
 
-    useEffect(() => {
-        const fetchMainProducts = async () => {
-            try {
-                const res = await axios.get(`${import.meta.env.VITE_BASE_URL}/api/ui/get`);
-                const productIds = res?.data?.data?.mainProducts || [];
-
-                if (res.status === 200 && Array.isArray(productIds)) {
-                    const productRequests = productIds.map((id) =>
-                        axios.post(`${import.meta.env.VITE_BASE_URL}/api/product/getProductById`, { id })
-                    );
-
-                    const productResponses = await Promise.all(productRequests);
-                    const products = productResponses.map(response => response.data.data);
-
-                    setMainProducts(products);
-                    console.log("Final products:", products);
-                } else {
-                    console.warn("Condition failed: mainProducts not an array or bad status");
-                }
-            } catch (err) {
-                console.error("Error fetching main products:", err);
-            }
-        };
-
-        fetchMainProducts();
-    }, []);
-
-
-
+    const loadingSkeleton = () => {
+        return Array.from({ length: 5 }, (_, i) => (
+            <SwiperSlide key={`skeleton-${i}`}>
+                <div className="flex justify-center flex-col items-center overflow-hidden relative">
+                    <div className="overflow-hidden">
+                        <img
+                            src="https://media.istockphoto.com/id/1324356458/vector/picture-icon-photo-frame-symbol-landscape-sign-photograph-gallery-logo-web-interface-and.jpg?s=612x612&w=0&k=20&c=ZmXO4mSgNDPzDRX-F8OKCfmMqqHpqMV6jiNi00Ye7rE="
+                            alt="loading"
+                            className="h-full object-contain transition-transform duration-300 transform hover:scale-105 animate-pulse"
+                        />
+                    </div>
+                    <h1 className="p-3 animate-pulse">Loading...</h1>
+                </div>
+            </SwiperSlide>
+        ));
+    };
 
     return (<>
         <div className="max-w-[90vw] mx-auto rounded-lg relative">
             <Swiper
-                modules={[Autoplay]}
+                modules={[Autoplay, Pagination, Navigation]}
                 pagination={{
-                    clickable: true, dynamicBullets: true,
+                    clickable: true,
+                    dynamicBullets: true,
                 }}
                 navigation={true}
                 spaceBetween={30}
@@ -54,25 +39,29 @@ const MainProducts = () => {
                 autoplay={{delay: 3000, disableOnInteraction: false}}
                 className="rounded-lg overflow-hidden"
             >
-                {mainProducts?.map((product) => (<SwiperSlide key={product._id}>
-                    <div className="flex justify-center flex-col items-center overflow-hidden relative"
-                         onClick={() => navigate(`/product-info/${product._id}`)}
-                    >
-                        <div className="overflow-hidden">
-                            <img
-                                src={`https://ik.imagekit.io/0Shivams${product.images?.[0] || "https://static-00.iconduck.com/assets.00/no-image-icon-512x512-lfoanl0w.png"}`}
-                                alt={product.name}
-                                onError={(e) => {
-                                    e.target.onerror = null;
-                                    e.target.src = "https://static-00.iconduck.com/assets.00/no-image-icon-512x512-lfoanl0w.png";
-                                }}
-                                className="h-full object-contain transition-transform duration-300 transform hover:scale-105"
-                            />
-                        </div>
-                        <h1 className="p-3">{product.name}</h1>
-                    </div>
+                {mainProductsLoading
+                    ? loadingSkeleton()
+                    : mainProducts?.map((product) => (
+                        <SwiperSlide key={product._id}>
+                            <div className="flex justify-center flex-col items-center overflow-hidden relative"
+                                 onClick={() => navigate(`/product-info/${product._id}`)}
+                            >
+                                <div className="overflow-hidden">
+                                    <img
+                                        src={product.images?.[0]?`https://ik.imagekit.io/0Shivams${product.images?.[0]}` : "https://media.istockphoto.com/id/1324356458/vector/picture-icon-photo-frame-symbol-landscape-sign-photograph-gallery-logo-web-interface-and.jpg?s=612x612&w=0&k=20&c=ZmXO4mSgNDPzDRX-F8OKCfmMqqHpqMV6jiNi00Ye7rE="}
+                                        alt={product.name}
+                                        onError={(e) => {
+                                            e.target.onerror = null;
+                                            e.target.src = "https://static-00.iconduck.com/assets.00/no-image-icon-512x512-lfoanl0w.png";
+                                        }}
+                                        className="h-full object-contain transition-transform duration-300 transform hover:scale-105"
+                                    />
+                                </div>
+                                <h1 className="p-3">{product.name}</h1>
+                            </div>
 
-                </SwiperSlide>))}
+                        </SwiperSlide>
+                    ))}
             </Swiper>
         </div>
     </>)

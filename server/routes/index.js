@@ -10,7 +10,7 @@ const faq = require('./faq.routes');
 const newsletter = require('./newsletter.routes');
 const reviewRoutes = require('./review.routes');
 const saveForLater = require('./saveForLater.routes');
-const authRouter =  require('./auth.routes');
+
 module.exports = {
     userRouter,
     productRouter,
@@ -24,5 +24,5 @@ module.exports = {
     newsletter,
     reviewRoutes,
     saveForLater,
-    authRouter
+
 };
