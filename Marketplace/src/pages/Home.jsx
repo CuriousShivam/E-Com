@@ -24,9 +24,9 @@ const Home = () => {
 
                 if (res.data.success) {
                     const data = res.data.data;
-                    console.log("Inside Home.jsx",data.banners, data.mainProducts)
-                    setBanners(data.banners || []);
-                    setBannersLoading(false);
+                    //console.log("Inside Home.jsx",data.banners, data.mainProducts)
+                    // setBanners(data.banners || []);
+                    // setBannersLoading(false);
 
                     const productIds = data.mainProducts || [];
 
@@ -39,13 +39,13 @@ const Home = () => {
                         const products = productResponses.map((response) => response.data.data);
 
                         setMainProducts(products);
+                        setMainProductsLoading(false);
+                        setBanners(data.banners || []);
+                        setBannersLoading(false);
                     }
                 }
             } catch (err) {
                 console.error("Error fetching homepage data:", err);
-            } finally {
-                setMainProductsLoading(false);
-                // console.log("INSIDE HOME.JSX",banners, mainProducts)
             }
         };
 
