@@ -22,19 +22,15 @@ const Products = () => {
 
     useEffect(() => {
         const fetchProducts = async () => {
-            Swal.fire({
-                title: 'Loading...', allowOutsideClick: false, allowEscapeKey: false, didOpen: () => {
-                    Swal.showLoading();
-                }
-            });
+
             try {
                 const res = await axios.get(`${import.meta.env.VITE_BASE_URL}/api/product/getActiveProducts`, {withCredentials: true})
                 console.log(res.data)
                 const shuffledProducts = shuffleArray(res.data.data);
                 setProducts(shuffledProducts);
-                swal.close()
+                //swal.close()
             } catch (e) {
-                swal.close()
+                //swal.close()
                 console.log(e)
                 swal.fire({
                     icon: "error", title: "Oops...", text: "Something went wrong...",

@@ -8,6 +8,8 @@ import ShowCategory from "./customer/HomeSections/ShopByCategory.jsx"
 import SearchBar from "./customer/HomeSections/SearchBar.jsx"
 import {useEffect, useState} from "react";
 import axios from "axios";
+import Swal from "sweetalert2";
+import swal from "sweetalert2";
 
 
 const Home = () => {
@@ -20,6 +22,11 @@ const Home = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
+                Swal.fire({
+                    title: 'Loading...', allowOutsideClick: false, allowEscapeKey: false, didOpen: () => {
+                        Swal.showLoading();
+                    }
+                });
                 const res = await axios.get(`${import.meta.env.VITE_BASE_URL}/api/ui/get`);
 
                 if (res.data.success) {
@@ -42,9 +49,13 @@ const Home = () => {
                         setMainProductsLoading(false);
                         setBanners(data.banners || []);
                         setBannersLoading(false);
+                        Swal.close()
                     }
                 }
             } catch (err) {
+                swal.fire({
+                    icon: "error", title: "Oops...", text: "Something went wrong...",
+                })
                 console.error("Error fetching homepage data:", err);
             }
         };

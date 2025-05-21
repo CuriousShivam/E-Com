@@ -70,12 +70,3 @@ export default function App() {
     );
 }
 
-// Loader
-// Swal.fire({
-//     title: 'Decreasing Quantity...',
-//     allowOutsideClick: false,
-//     allowEscapeKey: false,
-//     didOpen: () => {
-//         Swal.showLoading();
-//     }
-// });
