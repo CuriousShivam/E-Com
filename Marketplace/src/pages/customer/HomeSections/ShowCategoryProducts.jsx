@@ -12,11 +12,10 @@ const CategoryProducts = () => {
             try {
                 const response = await fetch(`${import.meta.env.VITE_BASE_URL}/api/product/getProductsByCategory/${categoryId}`);
                 const data = await response.json();
-                setProducts(data.products);
-                if (data.products.length === 0) {
+                setProducts(data?.products);
+                if (data?.products?.length === 0 ||  data?.products?.length === undefined) {
                     setFoundProducts(false);
                 }
-                // console.log(data.products[0])
             } catch (err) {
                 console.error("Error fetching products", err);
             }
@@ -36,7 +35,7 @@ const CategoryProducts = () => {
                     ? (<p className="text-center text-xl text-gray-500">Finding Products...</p>)
                     : (
                         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                            {products.map((product) => (
+                            {products?.map((product) => (
                                 <div
                                     key={product._id}
                                     className="group bg-white border rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition duration-300 cursor-pointer"
@@ -64,9 +63,8 @@ const CategoryProducts = () => {
                             ))}
                         </div>
                     )
-                : <p className="text-center text-xl text-gray-500">No Products Found...</p>}
+                : <p className="text-center text-xl text-gray-500">No Products Found.</p>}
         </div>
-
     );
 };
 
