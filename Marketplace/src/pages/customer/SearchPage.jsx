@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import {useLocation, useNavigate} from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
-
+import {motion} from "framer-motion";
 const SearchPage = () => {
     const location = useLocation();
     const navigate = useNavigate();
@@ -58,7 +58,7 @@ const SearchPage = () => {
     };
 
     return (
-        <div className="max-w-7xl mx-auto p-6">
+        <motion.div className="max-w-7xl mx-auto p-6" initial={{opacity: 0}} animate={{opacity:1}} exit={{opacity:0}}>
             <h1 className="text-3xl font-bold mb-6">Search Products</h1>
 
             {/* Filters */}
@@ -140,7 +140,7 @@ const SearchPage = () => {
                 </div>
 
             )}
-        </div>
+        </motion.div>
     );
 };
 

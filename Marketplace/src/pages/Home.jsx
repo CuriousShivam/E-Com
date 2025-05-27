@@ -10,7 +10,7 @@ import {useEffect, useState} from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
 import swal from "sweetalert2";
-
+import {motion} from "framer-motion";
 
 const Home = () => {
     const [banners, setBanners] = useState([]);
@@ -65,7 +65,7 @@ const Home = () => {
         fetchData();
     }, []);
     return (
-        <>
+        <motion.div initial={{opacity: 0}} animate={{opacity:1}} exit={{opacity:0}}>
             <SearchBar />
             <ShowCategory />
             <Carousel bannersLoading={bannersLoading} banners={banners} />
@@ -76,7 +76,7 @@ const Home = () => {
             <UserReviews />
             <Newsletter />
             <FAQ />
-        </>
+        </motion.div>
     );
 }
 

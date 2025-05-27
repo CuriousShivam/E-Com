@@ -1,5 +1,6 @@
 import {useState, useEffect} from 'react';
 import {useNavigate, useParams} from 'react-router-dom';
+import {motion} from "framer-motion";
 
 const CategoryProducts = () => {
     const {categoryId} = useParams();
@@ -24,7 +25,7 @@ const CategoryProducts = () => {
     }, [categoryId]);
 
     return (
-        <div className="category-products px-4 sm:px-8 lg:px-16 py-10">
+        <motion.div className="category-products px-4 sm:px-8 lg:px-16 py-10" initial={{opacity: 0}} animate={{opacity:1}} exit={{opacity:0}} >
             <h1 className="text-center text-3xl font-bold text-gray-800 mb-8">
                 Products in this Category
             </h1>
@@ -64,7 +65,7 @@ const CategoryProducts = () => {
                         </div>
                     )
                 : <p className="text-center text-xl text-gray-500">No Products Found.</p>}
-        </div>
+        </motion.div>
     );
 };
 

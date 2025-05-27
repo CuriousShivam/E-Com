@@ -6,6 +6,7 @@ import {useSelector} from "react-redux";
 import addToCart from "../../components/reUsable/AddToCart";
 import GoBack from "../../components/reUsable/Goback";
 import ShowReviews from "./ShowReviews.jsx";
+import {motion} from "framer-motion";
 
 const fallbackImg = "https://static-00.iconduck.com/assets.00/no-image-icon-512x512-lfoanl0w.png";
 
@@ -39,7 +40,7 @@ const ProductInfo = () => {
                     const productData = res.data.data;
                     setProduct(productData);
 
-                    if(productData.quantity < 1){
+                    if (productData.quantity < 1) {
                         setOutOfStock(true)
                     }
 
@@ -216,168 +217,171 @@ const ProductInfo = () => {
     };
 
 
-    return (<div className="flex flex-col md:flex-row gap-8 p-4">
-        {/* Image Section */}
-        <div className="w-full md:w-1/3 relative">
-            <div
-                className="w-full h-96 border rounded-lg overflow-hidden relative"
-                onMouseEnter={() => setZoomVisible(true)}
-                onMouseLeave={() => setZoomVisible(false)}
-                onMouseMove={handleMouseMove}
-                ref={imgRef}
-            >
-                <img
-                    src={mainImage || fallbackImg}
-                    alt={product?.name}
-                    className="w-full h-full object-contain"
-                    onError={(e) => {
-                        e.target.onerror = null;
-                        e.target.src = fallbackImg;
-                    }}
-                />
-            </div>
-
-            {/* Zoom View on Hover */}
-            {zoomVisible && (<div
-                className="hidden md:block absolute top-0 left-full ml-6 w-[150%] h-[100%] border shadow-xl rounded-lg z-50 bg-white"
-                style={{
-                    backgroundImage: `url(${mainImage})`,
-                    backgroundRepeat: "no-repeat",
-                    backgroundSize: "200%", ...zoomStyles
-                }}
-            />)}
-
-            {/* Thumbnails */}
-            <div className="flex gap-4 justify-center mt-4">
-                {product?.images?.slice(0, 4).map((img, index) => {
-                    const fullURL = `https://ik.imagekit.io/0Shivams${img}`;
-                    return (<img
-                        key={index}
-                        src={fullURL}
-                        alt={`Thumbnail ${index + 1}`}
-                        className={`w-20 h-20 object-cover border-2 rounded-md cursor-pointer ${mainImage === fullURL ? "border-blue-500" : "border-gray-300"}`}
-                        onClick={() => setMainImage(fullURL)}
+    return (
+        <motion.div className="flex flex-col md:flex-row gap-8 p-4" initial={{opacity: 0}} animate={{opacity: 1}}
+                    exit={{opacity: 0}}>
+            {/* Image Section */}
+            <div className="w-full md:w-1/3 relative">
+                <div
+                    className="w-full h-96 border rounded-lg overflow-hidden relative"
+                    onMouseEnter={() => setZoomVisible(true)}
+                    onMouseLeave={() => setZoomVisible(false)}
+                    onMouseMove={handleMouseMove}
+                    ref={imgRef}
+                >
+                    <img
+                        src={mainImage || fallbackImg}
+                        alt={product?.name}
+                        className="w-full h-full object-contain"
                         onError={(e) => {
                             e.target.onerror = null;
                             e.target.src = fallbackImg;
                         }}
-                    />);
-                })}
-            </div>
-        </div>
+                    />
+                </div>
 
-        {/* Product Info */}
-        <div className="w-full md:w-2/3 space-y-4">
-            {purchaseInfo && purchaseInfo.purchased && purchaseInfo.purchaseDate && (
-                <div className="flex items-center gap-2 bg-green-100 text-green-800 px-4 py-2 rounded-md shadow w-fit">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-green-600" fill="none"
-                         viewBox="0 0 24 24"
-                         stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-                              d="M5 13l4 4L19 7"/>
-                    </svg>
-                    <span>You purchased this on {new Date(purchaseInfo.purchaseDate).toLocaleDateString()}</span>
+                {/* Zoom View on Hover */}
+                {zoomVisible && (<div
+                    className="hidden md:block absolute top-0 left-full ml-6 w-[150%] h-[100%] border shadow-xl rounded-lg z-50 bg-white"
+                    style={{
+                        backgroundImage: `url(${mainImage})`,
+                        backgroundRepeat: "no-repeat",
+                        backgroundSize: "200%", ...zoomStyles
+                    }}
+                />)}
+
+                {/* Thumbnails */}
+                <div className="flex gap-4 justify-center mt-4">
+                    {product?.images?.slice(0, 4).map((img, index) => {
+                        const fullURL = `https://ik.imagekit.io/0Shivams${img}`;
+                        return (<img
+                            key={index}
+                            src={fullURL}
+                            alt={`Thumbnail ${index + 1}`}
+                            className={`w-20 h-20 object-cover border-2 rounded-md cursor-pointer ${mainImage === fullURL ? "border-blue-500" : "border-gray-300"}`}
+                            onClick={() => setMainImage(fullURL)}
+                            onError={(e) => {
+                                e.target.onerror = null;
+                                e.target.src = fallbackImg;
+                            }}
+                        />);
+                    })}
+                </div>
+            </div>
+
+            {/* Product Info */}
+            <div className="w-full md:w-2/3 space-y-4">
+                {purchaseInfo && purchaseInfo.purchased && purchaseInfo.purchaseDate && (
+                    <div
+                        className="flex items-center gap-2 bg-green-100 text-green-800 px-4 py-2 rounded-md shadow w-fit">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-green-600" fill="none"
+                             viewBox="0 0 24 24"
+                             stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+                                  d="M5 13l4 4L19 7"/>
+                        </svg>
+                        <span>You purchased this on {new Date(purchaseInfo.purchaseDate).toLocaleDateString()}</span>
+                    </div>)}
+
+
+                <div className="flex gap-2 items-center">
+                    <GoBack/>
+                    <h1 className="text-xl font-semibold">{product?.name} — <span
+                        className="text-gray-600">{product?.description}</span></h1>
+                </div>
+                <hr/>
+                <div className="space-y-1">
+                    <p className="text-red-500 font-bold">{60}% off</p>
+                    <p className="text-green-600 text-lg font-semibold">₹{product.price}</p>
+                    <p className="line-through text-gray-500 text-sm">M.R.P: ₹{inflatedPrice}</p>
+                    <p className="text-xs text-gray-600">Inclusive of all taxes</p>
+                </div>
+
+                {/* Attributes */}
+                {product?.attributes?.length > 0 && (<div className="overflow-x-auto mt-6">
+                    <h2 className="text-lg font-semibold mb-2">Product Specifications</h2>
+                    <table className="min-w-full text-sm text-left border rounded-lg overflow-hidden">
+                        <thead className="bg-gray-100 text-gray-700">
+                        <tr>
+                            <th className="px-4 py-2">Attribute</th>
+                            <th className="px-4 py-2">Value</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {product.attributes.map((attr, i) => (<tr key={i} className="even:bg-gray-50">
+                            <td className="px-4 py-2 font-medium capitalize">{attr.key}</td>
+                            <td className="px-4 py-2">{attr.value}</td>
+                        </tr>))}
+                        </tbody>
+                    </table>
                 </div>)}
 
 
-            <div className="flex gap-2 items-center">
-                <GoBack/>
-                <h1 className="text-xl font-semibold">{product?.name} — <span
-                    className="text-gray-600">{product?.description}</span></h1>
-            </div>
-            <hr/>
-            <div className="space-y-1">
-                <p className="text-red-500 font-bold">{60}% off</p>
-                <p className="text-green-600 text-lg font-semibold">₹{product.price}</p>
-                <p className="line-through text-gray-500 text-sm">M.R.P: ₹{inflatedPrice}</p>
-                <p className="text-xs text-gray-600">Inclusive of all taxes</p>
-            </div>
-
-            {/* Attributes */}
-            {product?.attributes?.length > 0 && (<div className="overflow-x-auto mt-6">
-                <h2 className="text-lg font-semibold mb-2">Product Specifications</h2>
-                <table className="min-w-full text-sm text-left border rounded-lg overflow-hidden">
-                    <thead className="bg-gray-100 text-gray-700">
-                    <tr>
-                        <th className="px-4 py-2">Attribute</th>
-                        <th className="px-4 py-2">Value</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {product.attributes.map((attr, i) => (<tr key={i} className="even:bg-gray-50">
-                        <td className="px-4 py-2 font-medium capitalize">{attr.key}</td>
-                        <td className="px-4 py-2">{attr.value}</td>
-                    </tr>))}
-                    </tbody>
-                </table>
-            </div>)}
-
-
-            {/* Description */}
-            <div>
-                <h2 className="font-medium text-lg mb-1">About this Item:</h2>
-                <p className="text-sm text-gray-700">{product.description || "No description available."}</p>
-            </div>
-
-            {outOfStock ? null :
+                {/* Description */}
                 <div>
-                    <div className="font-bold">
-                        Address for Delivery -{" "}
-                        {defaultAddress
-                            ? `${defaultAddress.addressLine1}, ${defaultAddress.city}, ${defaultAddress.state} - ${defaultAddress.postalCode}`
-                            : "No default address available"}
-                    </div>
+                    <h2 className="font-medium text-lg mb-1">About this Item:</h2>
+                    <p className="text-sm text-gray-700">{product.description || "No description available."}</p>
+                </div>
 
-                    <p className="text-sm text-gray-600">
-                        This is your Default Address -
-                        You can select the other addresses while buying through the cart.
-                    </p>
+                {outOfStock ? null :
+                    <div>
+                        <div className="font-bold">
+                            Address for Delivery -{" "}
+                            {defaultAddress
+                                ? `${defaultAddress.addressLine1}, ${defaultAddress.city}, ${defaultAddress.state} - ${defaultAddress.postalCode}`
+                                : "No default address available"}
+                        </div>
 
-                    <div className="font-bold mt-2">
-                        Delivery Charge -{" "}
-                        <span className="text-green-600 font-semibold">
+                        <p className="text-sm text-gray-600">
+                            This is your Default Address -
+                            You can select the other addresses while buying through the cart.
+                        </p>
+
+                        <div className="font-bold mt-2">
+                            Delivery Charge -{" "}
+                            <span className="text-green-600 font-semibold">
                         ₹{deliveryInfo?.charge || 0}
                     </span>
-                    </div>
+                        </div>
 
-                    <div className="font-bold">
-                        Estimated Delivery Time -{" "}
-                        <span className="text-green-600 font-semibold">
+                        <div className="font-bold">
+                            Estimated Delivery Time -{" "}
+                            <span className="text-green-600 font-semibold">
                         {deliveryInfo?.time || "Fetching"} Days
                     </span>
+                        </div>
                     </div>
+                }
+
+
+                <p className="font-bold text-red-700 text-2xl">{outOfStock ? "Out of Stock" : null}</p>
+                {/* Actions */}
+                <div className="flex gap-4">
+                    <button
+                        disabled={outOfStock}
+                        className={`bg-black text-white px-6 py-2 rounded hover:bg-gray-800 w-1/2 ${outOfStock ? "cursor-not-allowed" : null}`}
+                        onClick={() => handleAddToCart(product._id)}
+                    >
+                        Add to Cart
+                    </button>
                 </div>
-            }
 
-
-            <p className="font-bold text-red-700 text-2xl">{outOfStock ? "Out of Stock" : null}</p>
-            {/* Actions */}
-            <div className="flex gap-4">
-                <button
-                    disabled={outOfStock}
-                    className={`bg-black text-white px-6 py-2 rounded hover:bg-gray-800 w-1/2 ${outOfStock ? "cursor-not-allowed" : null}`}
-                    onClick={() => handleAddToCart(product._id)}
+                <p
+                    onClick={handleReportProblem}
+                    className="underline cursor-pointer text-sm text-gray-600 hover:text-black"
                 >
-                    Add to Cart
-                </button>
+                    Report a problem about this product
+                </p>
+                {purchaseInfo?.purchased === true && (<p onClick={() => handleAddReview(id, user._id)}
+                                                         className="text-blue-600 cursor-pointer hover:underline">
+                    Add Review
+                </p>)}
+
+                <ShowReviews
+                    productId={id}
+                />
             </div>
-
-            <p
-                onClick={handleReportProblem}
-                className="underline cursor-pointer text-sm text-gray-600 hover:text-black"
-            >
-                Report a problem about this product
-            </p>
-            {purchaseInfo?.purchased === true && (<p onClick={() => handleAddReview(id, user._id)}
-                                                     className="text-blue-600 cursor-pointer hover:underline">
-                Add Review
-            </p>)}
-
-            <ShowReviews
-                productId={id}
-            />
-        </div>
-    </div>);
+        </motion.div>);
 };
 
 export default ProductInfo;

@@ -1,5 +1,5 @@
 import {BrowserRouter as Router, Navigate, Route, Routes} from "react-router-dom";
-
+import {AnimatePresence} from "framer-motion";
 // Hybrid Imports
 import LogIn from "./pages/Login";
 import NoPage from "./pages/NoPage";
@@ -34,38 +34,41 @@ import UpdateAddress from "./pages/customer/CheckAddress.jsx"
 export default function App() {
     return (
         <Router>
-            <Routes>
-                <Route path="/" element={<UserLayout/>}>
-                    <Route index element={<Home/>}/>
-                    <Route path="signup" element={<SignUp/>}/>
-                    <Route path="login" element={<LogIn/>}/>
-                    <Route path="product-info/:id" element={<ProductInfo/>}/>
-                    <Route path="add-to-cart/:productId/:userId" element={<AddToCart/>}/>
-                    <Route path="Cart" element={<Cart/>}/>
-                    <Route path="profile" element={<Profile/>}/>
-                    <Route path="explore" element={<Explore/>}/>
-                    <Route path="aboutUs" element={<AboutUs/>}/>
-                    <Route path="contact" element={<Contact/>}/>
-                    <Route path="orders" element={<Orders/>}/>
-                    <Route path="/reset-password/:token" element={<ResetPassword/>}/>
-                    <Route path="category/:categoryId" element={<CategoryProducts/>}/>
-                    <Route path="search" element={<SearchPage/>}/>
-                    <Route path="updateAddress" element={<UpdateAddress/>}/>
-                </Route>
+            <AnimatePresence>
+                <Routes>
+                    <Route path="/" element={<UserLayout/>}>
+                        <Route index element={<Home/>}/>
+                        <Route path="signup" element={<SignUp/>}/>
+                        <Route path="login" element={<LogIn/>}/>
+                        <Route path="product-info/:id" element={<ProductInfo/>}/>
+                        <Route path="add-to-cart/:productId/:userId" element={<AddToCart/>}/>
+                        <Route path="Cart" element={<Cart/>}/>
+                        <Route path="profile" element={<Profile/>}/>
+                        <Route path="explore" element={<Explore/>}/>
+                        <Route path="aboutUs" element={<AboutUs/>}/>
+                        <Route path="contact" element={<Contact/>}/>
+                        <Route path="orders" element={<Orders/>}/>
+                        <Route path="/reset-password/:token" element={<ResetPassword/>}/>
+                        <Route path="category/:categoryId" element={<CategoryProducts/>}/>
+                        <Route path="search" element={<SearchPage/>}/>
+                        <Route path="updateAddress" element={<UpdateAddress/>}/>
+                    </Route>
 
-                {/*<Route path="/admin" element={<AdminAuth><AdminLayout/></AdminAuth>}>*/}
-                <Route path="/admin" element={<ProtectedRoute><AdminLayout/></ProtectedRoute>}>
-                    <Route path="panel" element={<AdminPanel/>}/>
-                    <Route path="products" element={<Products/>}/>
-                    <Route path="update-product/:id" element={<UpdateProduct/>}/>
-                    <Route path="delete-product/:id" element={<DeleteProduct/>}/>
-                    <Route path="setting" element={<AdminSettings/>}/>
-                    <Route path="orders" element={<AdminOrders/>}/>
-                </Route>
+                    {/*<Route path="/admin" element={<AdminAuth><AdminLayout/></AdminAuth>}>*/}
+                    <Route path="/admin" element={<ProtectedRoute><AdminLayout/></ProtectedRoute>}>
+                        <Route path="panel" element={<AdminPanel/>}/>
+                        <Route path="products" element={<Products/>}/>
+                        <Route path="update-product/:id" element={<UpdateProduct/>}/>
+                        <Route path="delete-product/:id" element={<DeleteProduct/>}/>
+                        <Route path="setting" element={<AdminSettings/>}/>
+                        <Route path="orders" element={<AdminOrders/>}/>
+                    </Route>
 
-                <Route path="Home" element={<LandingPage/>} />
-                <Route path="*" element={<NoPage/>}/>
-            </Routes>
+                    <Route path="Home" element={<LandingPage/>}/>
+                    <Route path="*" element={<NoPage/>}/>
+
+                </Routes>
+            </AnimatePresence>
         </Router>
     );
 }

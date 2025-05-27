@@ -5,7 +5,7 @@ import axios from "axios";
 import {useNavigate} from "react-router-dom";
 import {ChevronDown, ChevronUp, LocationEdit, CircleX} from "lucide-react"
 import Swal from "sweetalert2";
-
+import {motion} from "framer-motion";
 const Orders = () => {
     const {user} = useSelector((state) => state.user);
     const [orders, setOrders] = useState([]);
@@ -114,40 +114,8 @@ const Orders = () => {
     };
 
 
-    // const cancelOrder = (order, index)=>{
-    //     Swal.fire({
-    //         title: 'Are you sure?',
-    //         text: "Want to cancel this order?",
-    //         icon: 'warning',
-    //         showCancelButton: true,
-    //         confirmButtonColor: '#3085d6',
-    //         cancelButtonColor: '#d33',
-    //         confirmButtonText: 'Proceed',
-    //         cancelButtonText: 'Cancel'
-    //     }).then((result) => {
-    //         if (result.isConfirmed) {
-    //             console.log('Confirmed!');
-    //             axios.post(`${import.meta.env.VITE_BASE_URL}/api/order/cancelOrder`, {
-    //                 orderId: order.order_id,
-    //                 documentId: order._id
-    //             }, {withCredentials: true}).then(() => {
-    //                 setOrders(prev => {
-    //                 const shallowCopy = [...prev];
-    //                 shallowCopy.splice(index,1);
-    //                 return shallowCopy;
-    //                 });
-    //                 console.log(orders)
-    //             }
-    //             )
-    //         } else {
-    //             console.log('Cancelled!');
-    //         }
-    //     });
-    // }
-
-
     return (
-        <div
+        <motion.div initial={{opacity: 0}} animate={{opacity:1}} exit={{opacity:0}}
             className="p-4 w-[70%] mt-5 ml-[15%] h-[80vh] overflow-y-scroll scrollbar-hide border rounded-2xl bg-white shadow-2xl">
             <div className="pb-3 border-b-2 border-gray-200 flex justify-between">
                 <div className="flex items-center gap-2">
@@ -246,7 +214,7 @@ const Orders = () => {
                     ;
                 })
             )}
-        </div>
+        </motion.div>
     );
 };
 

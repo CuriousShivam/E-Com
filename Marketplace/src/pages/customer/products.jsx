@@ -136,7 +136,7 @@ const Products = () => {
                                             {discountPercent}% OFF
                                         </span>
                                 <button
-                                    className={`text-center p-2 border-2 border-black rounded-lg hover:bg-gray-200 ${product.quantity < 1 ? "cursor-not-allowed bg-red-200" : null}`}
+                                    className={`text-center p-2 border-2 border-black rounded-lg  ${product.quantity < 1 ? "cursor-not-allowed bg-red-200 hover:bg-gray-200" : "hover:bg-green-200"}`}
                                     onClick={() => handleAddToCart(product._id, user)}
                                     disabled={product.quantity < 1}
 

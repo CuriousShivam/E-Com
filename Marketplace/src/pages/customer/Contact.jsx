@@ -1,6 +1,6 @@
 import React, {useRef, useState} from "react";
 import emailjs from "@emailjs/browser";
-
+import {motion} from "framer-motion";
 const Contact = () => {
     const [formData, setFormData] = useState({
         name: "",
@@ -53,7 +53,7 @@ const Contact = () => {
 
 
     return (
-        <div className="max-w-2xl mx-auto mt-10 bg-white p-8 rounded-xl shadow-lg">
+        <motion.div className="max-w-2xl mx-auto mt-10 bg-white p-8 rounded-xl shadow-lg" initial={{opacity: 0}} animate={{opacity:1}} exit={{opacity:0}}>
             <h1 className="text-3xl font-bold text-center mb-6">Contact Us</h1>
             <form ref={formRef} onSubmit={sendMail} className="space-y-4">
             <div>
@@ -109,7 +109,7 @@ const Contact = () => {
                     <p className="text-red-500 mt-4 text-center">Oops! Something went wrong.</p>
                 )}
             </form>
-        </div>
+        </motion.div>
     );
 };
 

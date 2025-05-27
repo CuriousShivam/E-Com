@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import { setUser } from "../store/User";
 import axios from "axios";
 import { z } from "zod";
-
+import {motion} from "framer-motion"
 const Login = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -103,7 +103,7 @@ const Login = () => {
     };
 
     return (
-        <div className="flex pt-16 justify-center bg-white px-4">
+        <motion.div className="flex pt-16 justify-center bg-white px-4" initial={{opacity: 0}} animate={{opacity:1}} exit={{opacity:0}}>
             <form
                 onSubmit={onSubmit}
                 className="w-full max-w-md bg-white border border-gray-300 rounded-lg p-6 sm:p-8"
@@ -165,7 +165,7 @@ const Login = () => {
                     </Link>
                 </p>
             </form>
-        </div>
+        </motion.div>
     );
 
 };

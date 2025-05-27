@@ -7,18 +7,15 @@ import {useNavigate} from "react-router-dom";
 import {z} from "zod";
 import {setUser} from "../../store/User.js";
 import {useDispatch} from "react-redux";
-
+import {motion} from "framer-motion";
 const Profile = () => {
     const {user} = useSelector((state) => state.user);
     const navigate = useNavigate();
-    //const dispatch = useDispatch();
     useEffect(() => {
         if (!user) {
             navigate('/login');
         }
-        // else if(user?.isAdmin){
-        //     navigate('/admin/panel');
-        // }
+
     }, []);
     const [formData, setFormData] = useState({
         username: "",
@@ -231,7 +228,7 @@ const Profile = () => {
 
 
     return (
-        <div className="p-6 w-full mx-auto overflow-y-auto scrollbar-hide">
+        <motion.div className="p-6 w-full mx-auto overflow-y-auto scrollbar-hide" initial={{opacity: 0}} animate={{opacity:1}} exit={{opacity:0}}>
             <h1 className="text-3xl font-semibold mb-6 text-gray-900">
                 Hey, <span className="capitalize">{user?.firstname}</span>
                 <span className="text-lg text-gray-600 font-normal"> — update your profile here</span>
@@ -370,7 +367,7 @@ const Profile = () => {
                     </ul>
                 </div>
             </div>
-        </div>
+        </motion.div>
     );
 };
 

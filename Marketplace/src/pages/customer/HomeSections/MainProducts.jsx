@@ -43,10 +43,10 @@ const MainProducts = ({mainProducts, mainProductsLoading}) => {
                     ? loadingSkeleton()
                     : mainProducts?.map((product) => (
                         <SwiperSlide key={product._id}>
-                            <div className="flex justify-center flex-col items-center overflow-hidden relative"
+                            <div className="flex justify-center flex-col items-center overflow-hidden relative h-full "
                                  onClick={() => navigate(`/product-info/${product._id}`)}
                             >
-                                <div className="overflow-hidden">
+                                <div className="overflow-hidden ">
                                     <img
                                         src={product.images?.[0]?`https://ik.imagekit.io/0Shivams${product.images?.[0]}` : "https://media.istockphoto.com/id/1324356458/vector/picture-icon-photo-frame-symbol-landscape-sign-photograph-gallery-logo-web-interface-and.jpg?s=612x612&w=0&k=20&c=ZmXO4mSgNDPzDRX-F8OKCfmMqqHpqMV6jiNi00Ye7rE="}
                                         alt={product.name}
@@ -54,10 +54,10 @@ const MainProducts = ({mainProducts, mainProductsLoading}) => {
                                             e.target.onerror = null;
                                             e.target.src = "https://static-00.iconduck.com/assets.00/no-image-icon-512x512-lfoanl0w.png";
                                         }}
-                                        className="h-full object-contain transition-transform duration-300 transform hover:scale-105"
+                                        className="h-[200px] object-contain transition-transform duration-300 transform hover:scale-105"
                                     />
                                 </div>
-                                <h1 className="p-3">{product.name}</h1>
+                                <h1 className="p-3 mb-10">{product.name}</h1>
                             </div>
 
                         </SwiperSlide>

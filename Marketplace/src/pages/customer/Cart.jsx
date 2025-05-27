@@ -8,7 +8,7 @@ import ShowCartItems from "./OrderModule/ShowCartItems.jsx";
 import {handlePayment} from "./OrderModule/handlePayment.js";
 import {handleAddressClick} from "./OrderModule/handleAddressClick.js";
 import SaveForLater from "./OrderModule/SaveForLater.jsx"
-
+import {motion} from "framer-motion";
 const MySwal = withReactContent(Swal);
 
 const Cart = () => {
@@ -169,7 +169,7 @@ const Cart = () => {
 
 
     return (
-        <div className="p-4 mx-auto min-h-[90vh]">
+        <motion.div className="p-4 mx-auto min-h-[90vh]" initial={{opacity: 0}} animate={{opacity:1}} exit={{opacity:0}}>
             <ShowCartItems
                 cartItems={cartItems}
                 outOfStockItems={outOfStockItems}
@@ -186,7 +186,7 @@ const Cart = () => {
             user={user}
             />
             )}
-        </div>
+        </motion.div>
     );
 };
 
