@@ -8,7 +8,7 @@ import GoBack from "../../components/reUsable/Goback";
 import ShowReviews from "./ShowReviews.jsx";
 import {motion} from "framer-motion";
 
-const fallbackImg = "../../../../public/no-img.png";
+const fallbackImg = "/no-img.png";
 
 const ProductInfo = () => {
     const {id} = useParams();

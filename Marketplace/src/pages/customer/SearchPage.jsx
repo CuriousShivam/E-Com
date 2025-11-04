@@ -125,7 +125,7 @@ const SearchPage = () => {
                                     alt={product.name}
                                     onError={(e) => {
                                         e.target.onerror = null;
-                                        e.target.src = "../../../../public/no-img.png";
+                                        e.target.src = "/no-img.png";
                                     }}
                                     className="object-contain w-full h-full transition-transform duration-300 hover:scale-105"
                                 />

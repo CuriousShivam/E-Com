@@ -52,7 +52,7 @@ const MainProducts = ({mainProducts, mainProductsLoading}) => {
                                         alt={product.name}
                                         onError={(e) => {
                                             e.target.onerror = null;
-                                            e.target.src = "../../../../public/no-img.png";
+                                            e.target.src = "/no-img.png";
                                         }}
                                         className="h-[200px] object-contain transition-transform duration-300 transform hover:scale-105"
                                     />

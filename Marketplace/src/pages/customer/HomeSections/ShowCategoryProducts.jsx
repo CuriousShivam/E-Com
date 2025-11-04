@@ -49,7 +49,7 @@ const CategoryProducts = () => {
                                             className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                                             onError={(e) => {
                                                 e.target.onerror = null;
-                                                e.target.src = "../../../../public/no-img.png";
+                                                e.target.src = "/no-img.png";
                                             }}
                                         />
                                     </div>

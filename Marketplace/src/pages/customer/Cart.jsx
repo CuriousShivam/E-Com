@@ -112,7 +112,7 @@ const Cart = () => {
         fetchCartProducts();
     }, [user, cartUpdated]);
 
-    const fallbackImg = "../../../../public/no-img.png";
+    const fallbackImg = "/no-img.png";
     const totalPrice = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
 
     const handleProduct = (id) => navigate(`/product-info/${id}`);

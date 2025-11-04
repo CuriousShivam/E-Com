@@ -101,11 +101,11 @@ const Products = () => {
                             >
                                 <>
                                     <img
-                                        src={`https://ik.imagekit.io/0Shivams${product.images?.[0] || "../../../../public/no-img.png"}`}
+                                        src={`https://ik.imagekit.io/0Shivams${product.images?.[0] || "/no-img.png"}`}
                                         alt={product.name}
                                         onError={(e) => {
                                             e.target.onerror = null;
-                                            e.target.src = "../../../../public/no-img.png";
+                                            e.target.src = "/no-img.png";
                                         }}
                                         className="h-full object-contain transition-transform duration-300 transform hover:scale-105"
                                     /></>
