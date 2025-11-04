@@ -125,7 +125,7 @@ const SearchPage = () => {
                                     alt={product.name}
                                     onError={(e) => {
                                         e.target.onerror = null;
-                                        e.target.src = "https://static-00.iconduck.com/assets.00/no-image-icon-512x512-lfoanl0w.png";
+                                        e.target.src = "../../../../public/no-img.png";
                                     }}
                                     className="object-contain w-full h-full transition-transform duration-300 hover:scale-105"
                                 />

@@ -52,7 +52,7 @@ const MainProducts = ({mainProducts, mainProductsLoading}) => {
                                         alt={product.name}
                                         onError={(e) => {
                                             e.target.onerror = null;
-                                            e.target.src = "https://static-00.iconduck.com/assets.00/no-image-icon-512x512-lfoanl0w.png";
+                                            e.target.src = "../../../../public/no-img.png";
                                         }}
                                         className="h-[200px] object-contain transition-transform duration-300 transform hover:scale-105"
                                     />

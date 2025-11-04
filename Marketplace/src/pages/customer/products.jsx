@@ -101,11 +101,11 @@ const Products = () => {
                             >
                                 <>
                                     <img
-                                        src={`https://ik.imagekit.io/0Shivams${product.images?.[0] || "https://static-00.iconduck.com/assets.00/no-image-icon-512x512-lfoanl0w.png"}`}
+                                        src={`https://ik.imagekit.io/0Shivams${product.images?.[0] || "../../../../public/no-img.png"}`}
                                         alt={product.name}
                                         onError={(e) => {
                                             e.target.onerror = null;
-                                            e.target.src = "https://static-00.iconduck.com/assets.00/no-image-icon-512x512-lfoanl0w.png";
+                                            e.target.src = "../../../../public/no-img.png";
                                         }}
                                         className="h-full object-contain transition-transform duration-300 transform hover:scale-105"
                                     /></>

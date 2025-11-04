@@ -135,7 +135,7 @@ const updateProduct = async (req, res) => {
                 length,
                 about
             } = req.body;
-
+            console.log("Inside P controller ", req.body)
             // console.log("Images Array: ", JSON.parse(imagesArr), imagesArr)
             // console.log('FileID : ', JSON.parse(fileId))
             // console.log('Delete Image Array: ', deleteImageArr)
@@ -173,9 +173,9 @@ const updateProduct = async (req, res) => {
             // console.log(" imgArr ", imgArr)
             // console.log('Final images array and file path: ' , imagesArr, filePath)
 
-            // console.log("Images: ", updateData.images)
+            console.log("Images: ", updateData.images)
             await Product.findByIdAndUpdate(req.params.id, updateData);
-
+            console.log("Updated Sucessfully")
             const product = await Product.findById(req.params.id);
             res.status(200).json({message: 'Product updated successfully'});
 
@@ -270,6 +270,14 @@ const getCategories = async (req, res) => {
     }
 };
 
+const getAllCategories = async (req, res) => {
+    try{
+        const categories = await Category.find();
+        res.status(200).json({categories: categories});
+    }catch(error){
+        console.error('Error fetching categories with product count:', error);
+    }
+}
 
 
 const getProductsByCategory = async (req, res) => {
@@ -395,8 +403,9 @@ module.exports = {
     getProductById,
     addCategory,
     getCategories,
+    getAllCategories,
     updateProductStock,
     updateisactive,
     getProductsByCategory,
-    searchProducts
+    searchProducts,
 }

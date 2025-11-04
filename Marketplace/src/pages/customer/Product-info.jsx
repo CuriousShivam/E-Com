@@ -8,7 +8,7 @@ import GoBack from "../../components/reUsable/Goback";
 import ShowReviews from "./ShowReviews.jsx";
 import {motion} from "framer-motion";
 
-const fallbackImg = "https://static-00.iconduck.com/assets.00/no-image-icon-512x512-lfoanl0w.png";
+const fallbackImg = "../../../../public/no-img.png";
 
 const ProductInfo = () => {
     const {id} = useParams();

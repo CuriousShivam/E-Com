@@ -136,6 +136,7 @@ const UpdateProduct = () => {
                 Swal.showLoading();
             }
         });
+        console.log(form.category)
         try {
             const formData = new FormData();
             formData.append("name", form.name);
@@ -190,7 +191,7 @@ const UpdateProduct = () => {
 
         const getAllCategories = async () => {
             try {
-                const res = await axios.get(`${import.meta.env.VITE_BASE_URL}/api/product/getCategories`, {
+                const res = await axios.get(`${import.meta.env.VITE_BASE_URL}/api/product/getAllCategories`, {
                     withCredentials: true
                 });
                 setCategories(res.data.categories);
@@ -211,7 +212,7 @@ const UpdateProduct = () => {
         {product ? (<>
             <div className="flex gap-2 items-center">
                 <GoBack/>
-                <h1 className="text-2xl">You are Updating <span className="font-bold">{product.name}</span></h1>
+                <h1 className="text-2xl">You are Updating : <span className="font-bold">{product.name}</span></h1>
             </div>
 
             <div className="m-4">
@@ -254,14 +255,18 @@ const UpdateProduct = () => {
                             onChange={handleChange}
                             className="p-2 border-b-2 border-black bg-transparent focus:outline-0"
                         >
-                            <option value={form.category._id}>{form.category.category}</option>
-                            {categories.map((cate) => (<option key={cate._id} value={cate._id} placeholder={cate.category}>
-                                {cate.category}
-                            </option>))}z
-
+                            <option value={form?.category?._id}>{form?.category?.category ?? "Select Category"}</option>
+                            {
+                                categories.map(
+                                    (cate) => (
+                                        <option key={cate._id} value={cate._id}>
+                                            {cate.category}
+                                        </option>)
+                                )
+                            }
                         </select>
                     </div>
-                    {console.log("Form Category : ", form.category)}
+
                     {/*<div>*/}
                     {/*    <select*/}
                     {/*        name="category"*/}

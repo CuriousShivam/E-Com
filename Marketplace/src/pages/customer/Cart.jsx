@@ -112,7 +112,7 @@ const Cart = () => {
         fetchCartProducts();
     }, [user, cartUpdated]);
 
-    const fallbackImg = "https://static-00.iconduck.com/assets.00/no-image-icon-512x512-lfoanl0w.png";
+    const fallbackImg = "../../../../public/no-img.png";
     const totalPrice = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
 
     const handleProduct = (id) => navigate(`/product-info/${id}`);

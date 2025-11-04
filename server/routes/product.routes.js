@@ -11,7 +11,7 @@ const {
     updateisactive,
     getActiveProducts,
     getProductsByCategory,
-    searchProducts
+    searchProducts, getAllCategories
 } = require('../controllers/product.controller')
 const getUserAuthentication = require('../middlewares/tokenAuth')
 
@@ -43,6 +43,8 @@ router.post('/updateisactive', updateisactive)
 router.get('/getProductsByCategory/:categoryId' , getProductsByCategory)
 
 router.post('/search', searchProducts);
+
+router.get('/getAllCategories', getAllCategories)
 
 
 // router.delete('/deleteCategory', getUserAuthentication, deleteCategory)

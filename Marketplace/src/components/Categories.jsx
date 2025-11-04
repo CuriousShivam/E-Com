@@ -63,7 +63,7 @@ const Categories = () => {
                 }
             });
             try {
-                const res = await axios.get(`${import.meta.env.VITE_BASE_URL}/api/product/getCategories`, {
+                const res = await axios.get(`${import.meta.env.VITE_BASE_URL}/api/product/getAllCategories`, {
                     withCredentials: true
                 });
                 console.log(res.data.categories)

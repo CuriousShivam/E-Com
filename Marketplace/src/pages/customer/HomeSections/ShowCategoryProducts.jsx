@@ -49,7 +49,7 @@ const CategoryProducts = () => {
                                             className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                                             onError={(e) => {
                                                 e.target.onerror = null;
-                                                e.target.src = "https://static-00.iconduck.com/assets.00/no-image-icon-512x512-lfoanl0w.png";
+                                                e.target.src = "../../../../public/no-img.png";
                                             }}
                                         />
                                     </div>
